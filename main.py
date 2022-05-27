@@ -2,20 +2,11 @@ import streamlit as st
 import pandas as pd
 from content_based_ui import content_based_ui
 from watchlist import watchlist
-from streamlit_lottie import st_lottie
-import requests
+
 
 st.set_page_config(
     layout="wide", page_title="Title_Based", page_icon="images/icon1.png"
 )
-
-def load_lottieurl(url):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
-
-lottie_start = load_lottieurl("https://assets2.lottiefiles.com/packages/lf20_khzniaya.json")
 
 #### CUSTOM CSS STYLING #####################################################################
 style = f"""
@@ -73,13 +64,7 @@ if len(st.session_state["watchlist"].movies_list) > 0:
     with st.sidebar.expander("My Watchlist"):
         st.write(pd.Series(st.session_state["watchlist"].movies_list, name="Title"))
 
-with st.container():
-    left_column, right_column = st.columns(2)
-with left_column:
-    st.write("")
-    st.title('MOVIE RECOMMENDER SYSTEM') 
-with right_column:
-    st_lottie(lottie_start, height=300,width=400, key="start")
+st.title('MOVIE RECOMMENDER SYSTEM 🍿') 
 st.sidebar.title("RECOMMEND ME")
 
     #### INITIALISE A CONTENT-BASED UI RENDERING OBECT ############
